@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/fv-panel-qr",
+  "sourceRoot": "apps/fv-panel-qr/src",
+  "prefix": "fv-playing-qr",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/fv-panel-qr",
+        "index": "apps/fv-panel-qr/src/index.html",
+        "main": "apps/fv-panel-qr/src/main.ts",
+        "polyfills": "apps/fv-panel-qr/src/polyfills.ts",
+        "tsConfig": "apps/fv-panel-qr/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/fv-panel-qr/src/favicon.ico",
+          "apps/fv-panel-qr/src/assets"
+        ],
+        "styles": ["apps/fv-panel-qr/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/fv-panel-qr/src/environments/environment.ts",
+              "with": "apps/fv-panel-qr/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "fv-panel-qr:build:production"
+        },
+        "development": {
+          "browserTarget": "fv-panel-qr:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "fv-panel-qr:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/fv-panel-qr/src/**/*.ts",
+          "apps/fv-panel-qr/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/fv-panel-qr"],
+      "options": {
+        "jestConfig": "apps/fv-panel-qr/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

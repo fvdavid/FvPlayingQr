@@ -1,0 +1,28 @@
+{
+  "root": "apps/fv-panel-qr-e2e",
+  "sourceRoot": "apps/fv-panel-qr-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/fv-panel-qr-e2e/cypress.json",
+        "devServerTarget": "fv-panel-qr:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "fv-panel-qr:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fv-panel-qr-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["fv-panel-qr"]
+}
