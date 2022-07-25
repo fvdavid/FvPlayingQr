@@ -1,0 +1,7 @@
+{
+  "name": "fv-menu-qr",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

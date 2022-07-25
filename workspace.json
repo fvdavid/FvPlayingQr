@@ -1,4 +1,7 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "fv-menu-qr": "apps/fv-menu-qr",
+    "fv-menu-qr-e2e": "apps/fv-menu-qr-e2e"
+  }
 }

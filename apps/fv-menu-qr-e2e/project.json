@@ -1,0 +1,28 @@
+{
+  "root": "apps/fv-menu-qr-e2e",
+  "sourceRoot": "apps/fv-menu-qr-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/fv-menu-qr-e2e/cypress.json",
+        "devServerTarget": "fv-menu-qr:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "fv-menu-qr:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fv-menu-qr-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["fv-menu-qr"]
+}
