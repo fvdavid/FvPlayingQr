@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@fv-playing-qr/material": ["libs/material/src/index.ts"],
+      "@fv-playing-qr/portal": ["libs/portal/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
