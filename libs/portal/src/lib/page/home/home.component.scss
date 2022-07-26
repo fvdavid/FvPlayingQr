@@ -1,0 +1,33 @@
+/* Put this code in your CSS file */
+
+/* The div container */
+.qrcodeImage {
+    display: flex;
+    flex: 1;
+}
+
+/* Add custom styles here */
+.center {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.example-viewport {
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.example-item {
+    height: 50px;
+}

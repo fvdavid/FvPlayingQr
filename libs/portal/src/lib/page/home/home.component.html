@@ -1,0 +1,312 @@
+<mat-grid-list cols="5" rows="6">
+
+    <mat-grid-tile colspan="2" rowspan="2">
+
+        <mat-card>
+            <mat-card-title>QR Code Preview</mat-card-title>
+            <mat-card-content>
+                <div class="qrcodeImage">
+                    <qrcode #parent [elementType]="elementType" [errorCorrectionLevel]="errorCorrectionLevel"
+                        [qrdata]="qrdata" [scale]="scale" [width]="width" [allowEmptyString]="true"
+                        [className]="cssClass" [colorDark]="colorDark" [colorLight]="colorLight" [margin]="margin"
+                        [alt]="alt" [ariaLabel]="ariaLabel" [title]="title" [imageSrc]="imageSrc"
+                        [imageHeight]="imageHeight" [imageWidth]="imageWidth" (qrCodeURL)="onChangeURL($event)">
+                    </qrcode>
+                </div>
+                <div class="downloadButton">
+                    <button *ngIf="this.elementType !== 'svg'" mat-raised-button color="primary"
+                        (click)="saveAsImage(parent)">Download QR Code Image</button>
+                    <a *ngIf="this.elementType === 'svg'" mat-raised-button color="primary" [href]="qrCodeSrc"
+                        download="qrcode">
+                        Download QR Code Image
+                    </a>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3" rowspan="4">
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+
+            <mat-card>
+                <mat-card-title>Options</mat-card-title>
+
+                <mat-card-content>
+                    <form class="form-full-width">
+                        <mat-form-field [style.width.px]=500 class="input-full-width" appearance="fill">
+                            <mat-label>QR Code (qrdata)</mat-label>
+                            <input disabled matInput name="qrdata" placeholder="qrdata" [(ngModel)]="qrdata" />
+                        </mat-form-field>
+
+                        <!-- <section>
+                            <div class="button-label">Or set:</div>
+                            <div class="button-row">
+                                <mat-button-toggle-group name="qrdata" aria-label="qrdata" [(ngModel)]="qrdata"
+                                    selected="qrdata">
+                                    <mat-button-toggle value="https://github.com/fvdavid/FvPlayingQr">
+                                        URL
+                                    </mat-button-toggle>
+                                    <mat-button-toggle value="Peter Parker">Peter Parker</mat-button-toggle>
+                                    <mat-button-toggle value="42">42</mat-button-toggle>
+                                    <mat-button-toggle value="">"" (empty string)</mat-button-toggle>
+                                </mat-button-toggle-group>
+                            </div>
+                        </section> -->
+
+                        <mat-form-field [style.width.px]=500 class="input-full-width" appearance="fill">
+                            <mat-label>Table Number</mat-label>
+                            <input matInput type="number" placeholder="number of table" />
+                        </mat-form-field>
+                    </form>
+
+                    <mat-divider></mat-divider>
+
+                    <h4>Format</h4>
+                    <section>
+                        <div class="button-label">elementType:</div>
+                        <div class="button-row">
+                            <mat-button-toggle-group name="elementType" aria-label="Format (elementType)"
+                                [(ngModel)]="elementType" selected="elementType"
+                                (change)="setImageVisibility(elementType === 'canvas')">
+                                <mat-button-toggle value="canvas">canvas (Default)</mat-button-toggle>
+                                <mat-button-toggle value="img">img</mat-button-toggle>
+                                <mat-button-toggle value="url">url</mat-button-toggle>
+                                <mat-button-toggle value="svg">svg</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </section>
+                    <mat-divider></mat-divider>
+
+                    <h4>ErrorCorrectionLevel</h4>
+
+                    <mat-button-toggle-group name="errorCorrectionLevel" aria-label="ErrorCorrectionLevel"
+                        [(ngModel)]="errorCorrectionLevel" selected="errorCorrectionLevel">
+                        <mat-button-toggle value="L">L</mat-button-toggle>
+                        <mat-button-toggle value="M">M (Default)</mat-button-toggle>
+                        <mat-button-toggle value="Q">Q</mat-button-toggle>
+                        <mat-button-toggle value="H">H</mat-button-toggle>
+                    </mat-button-toggle-group>
+
+                    <br />
+                    <br />
+
+                    <mat-divider></mat-divider>
+
+                    <h4>Size </h4>
+
+                    <section>
+                        <div class="button-label">Width:</div>
+                        <div class="button-row">
+                            <mat-button-toggle-group name="width" aria-label="Width" [(ngModel)]="width"
+                                selected="width">
+                                <mat-button-toggle *ngFor="let o of widthList" [value]="o.val">{{ o.title }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="button-label">Margin:</div>
+                        <div class="button-row">
+                            <mat-button-toggle-group name="margin" aria-label="Margin" [(ngModel)]="margin"
+                                selected="margin">
+                                <mat-button-toggle *ngFor="let o of marginList" [value]="o.val">{{ o.title }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="button-label">Scale:</div>
+                        <div class="button-row">
+                            <mat-button-toggle-group name="scale" aria-label="Scale" [(ngModel)]="scale"
+                                selected="scale">
+                                <mat-button-toggle *ngFor="let o of scaleList" [value]="o.val">{{ o.title }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </section>
+                    <p>Scale (size of pixel per module (black dot))</p>
+
+                    <br />
+
+                    <mat-divider></mat-divider>
+
+                    <h4>Image/Logo (optional)</h4>
+
+                    <mat-slide-toggle [checked]="showImage" (change)="setImageVisibility()">Include image properties
+                        (canvas
+                        only)
+                    </mat-slide-toggle>
+                    <br />
+                    <br />
+                    <section *ngIf="showImage">
+
+                        <div class="example-label-container">
+                            <label id="example-name-label" class="example-name-label">Width/Height: </label>
+                            <label class="example-value-label">{{imageWidth}}/{{imageHeight}}</label>
+                        </div>
+                        Width:
+                        <mat-slider [thumbLabel]="true" class="example-margin" [max]="width" [min]="10" [step]="'5'"
+                            [(ngModel)]="imageWidth" aria-labelledby="image width">
+                        </mat-slider>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Width</mat-label>
+                            <input matInput type="number" placeholder="{{width}}" [(ngModel)]="imageWidth" min="10">
+                        </mat-form-field>
+
+                        <br>
+                        Height:
+                        <mat-slider [thumbLabel]="true" class="example-margin" [max]="width" [min]="10" [step]="'5'"
+                            [(ngModel)]="imageHeight" aria-labelledby="image height">
+                        </mat-slider>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Height</mat-label>
+                            <input matInput type="number" placeholder="{{width}}" [(ngModel)]="imageHeight" min="10">
+                        </mat-form-field>
+
+                        <br />
+                        <br />
+                    </section>
+
+
+                    <mat-divider></mat-divider>
+
+                    <h4>Colors (optional)</h4>
+
+                    <mat-slide-toggle [checked]="showColors" (change)="setColorsVisibility()">Include colors properties
+                    </mat-slide-toggle>
+                    <br />
+                    <br />
+                    <section *ngIf="showColors">
+                        <div class="button-label">Foreground:</div>
+                        <div class="button-row">
+
+                            <button mat-stroked-button [style.color]="'#ffffff'" [style.background]="colorDark"
+                                [cpPosition]="'top'" [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true"
+                                [(colorPicker)]="colorDark" [cpOutputFormat]="'hex'">
+                                <mat-icon aria-hidden="false" aria-label="Color picker">format_color_fill</mat-icon>
+                            </button>
+
+                            <mat-button-toggle-group name="colorDark" aria-label="ColorDark" [(ngModel)]="colorDark"
+                                selected="colorDark">
+                                <mat-button-toggle value="#3f51b5">Indigo</mat-button-toggle>
+                                <mat-button-toggle value="#ff0000">Red</mat-button-toggle>
+                                <mat-button-toggle value="#ffffff">White</mat-button-toggle>
+                                <mat-button-toggle value="#000000">Default colorDark (#000000ff)</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </section>
+
+                    <section *ngIf="showColors">
+                        <div class="button-label">
+                            Background:
+                        </div>
+                        <div class="button-row">
+
+                            <button mat-stroked-button [style.background]="colorLight" [cpPosition]="'top'"
+                                [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true"
+                                [(colorPicker)]="colorLight" [cpOutputFormat]="'hex'">
+                                <mat-icon aria-hidden="false" aria-label="Color picker">format_color_fill</mat-icon>
+                            </button>
+
+                            <mat-button-toggle-group name="colorLight" aria-label="ColorLight" [(ngModel)]="colorLight"
+                                selected="colorLight">
+                                <mat-button-toggle value="#ff4081">Pink</mat-button-toggle>
+                                <mat-button-toggle value="#ff0000">Red</mat-button-toggle>
+                                <mat-button-toggle value="#000000">Black</mat-button-toggle>
+                                <mat-button-toggle value="#ffffff">Default colorLight (#ffffffff)</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </section>
+
+                    <mat-divider></mat-divider>
+
+                    <!-- <h4>CSS Styling (optional)</h4>
+                    <mat-slide-toggle [checked]="showCss" (change)="setCssVisibility()">Include CSS styling for the
+                        qrcode
+                        directive
+                    </mat-slide-toggle>
+
+                    <section *ngIf="showCss">
+                        <mat-radio-group aria-label="Select an option" [(ngModel)]="cssClass" class="radio-vertical">
+                            <mat-radio-button value="left">Left</mat-radio-button>
+                            <mat-radio-button value="center">Center</mat-radio-button>
+                            <mat-radio-button value="right">Right</mat-radio-button>
+                            <mat-radio-button value="demoBorder">Border</mat-radio-button>
+                            <mat-radio-button value="demoBorderRadius">BorderRadius</mat-radio-button>
+                            <mat-radio-button value="demoBorderRadius" (click)="changeMargin(0)">BorderRadius without
+                                margin
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </section>
+                    <br />
+                    <br />
+                    <mat-divider></mat-divider> -->
+
+                    <!-- <h4>Accessibility/a11y attributes (optional)</h4>
+                    <mat-slide-toggle [checked]="showA11y" (change)="setA11yVisibility()">Include Accessibility
+                        attributes
+                    </mat-slide-toggle>
+                    <br />
+                    <br /> -->
+
+                    <!-- <section *ngIf="showA11y">
+                        <form class="form-full-width">
+                            <mat-form-field class="input-full-width" appearance="fill">
+                                <mat-label>alt Attribute</mat-label>
+                                <input matInput name="alt" placeholder="alt" [(ngModel)]="alt" />
+                                <mat-hint>alt attribute is only available for elementTypes "img" and "url"</mat-hint>
+                            </mat-form-field>
+                            <br /><br />
+
+                            <mat-form-field class="input-full-width" appearance="fill">
+                                <mat-label>title Attribute</mat-label>
+                                <input matInput name="title" placeholder="title" [(ngModel)]="title" />
+                            </mat-form-field>
+
+                            <mat-form-field class="input-full-width" appearance="fill">
+                                <mat-label>aria-label Attribute</mat-label>
+                                <input matInput name="ariaLabel" placeholder="ariaLabel" [(ngModel)]="ariaLabel" />
+                                <mat-hint>aria-label attribute is only available for elementTypes "canvas", "img" and
+                                    "url"
+                                </mat-hint>
+                            </mat-form-field>
+                        </form>
+                    </section> -->
+
+                </mat-card-content>
+            </mat-card>
+        </cdk-virtual-scroll-viewport>
+
+
+
+    </mat-grid-tile>
+
+
+    <!-- <mat-grid-tile colspan="2" rowspan="1">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Shiba Inu</mat-card-title>
+                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                    bred for hunting.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile> -->
+</mat-grid-list>

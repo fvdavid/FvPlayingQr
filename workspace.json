@@ -1,9 +1,12 @@
 {
+  "name": "fv-qr",
   "version": 2,
   "projects": {
     "fv-menu-qr": "apps/fv-menu-qr",
     "fv-menu-qr-e2e": "apps/fv-menu-qr-e2e",
     "fv-panel-qr": "apps/fv-panel-qr",
-    "fv-panel-qr-e2e": "apps/fv-panel-qr-e2e"
+    "fv-panel-qr-e2e": "apps/fv-panel-qr-e2e",
+    "material": "libs/material",
+    "portal": "libs/portal"
   }
 }
