@@ -32,4 +32,4 @@ export const portalRoutes: Route[] = [
     HomeComponent
   ],
 })
-export class PortalModule {}
+export class PortalModule { }

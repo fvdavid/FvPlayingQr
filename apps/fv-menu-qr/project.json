@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/fv-menu-qr",
   "sourceRoot": "apps/fv-menu-qr/src",
   "prefix": "fv-playing-qr",
   "targets": {
@@ -85,8 +84,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/fv-menu-qr/src/**/*.ts",
-          "apps/fv-menu-qr/src/**/*.html"
+          "apps/fv-menu-qr/**/*.ts",
+          "apps/fv-menu-qr/**/*.html"
         ]
       }
     },
@@ -94,18 +93,18 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/fv-menu-qr"],
       "options": {
-        "jestConfig": "apps/fv-menu-qr/jest.config.js",
+        "jestConfig": "apps/fv-menu-qr/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "cap": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "--help"
       }
     },
     "add": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "add"
       },
@@ -119,7 +118,7 @@
       }
     },
     "copy": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "copy"
       },
@@ -133,7 +132,7 @@
       }
     },
     "open": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "open"
       },
@@ -147,7 +146,7 @@
       }
     },
     "run": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "run"
       },
@@ -161,7 +160,7 @@
       }
     },
     "sync": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "sync"
       },
@@ -175,7 +174,7 @@
       }
     },
     "update": {
-      "executor": "@nxtend/capacitor:cap",
+      "executor": "@nxext/capacitor:cap",
       "options": {
         "cmd": "update"
       },

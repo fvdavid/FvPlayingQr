@@ -25,7 +25,6 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
-
 @NgModule({
   imports: [
     FlexLayoutModule,
@@ -80,4 +79,4 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ScrollingModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

@@ -1,10 +1,11 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "fv-playing-qr",
   "affected": {
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "packageManager": "npm"
   },
   "implicitDependencies": {
     "package.json": {
@@ -21,13 +22,10 @@
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    }
   },
   "generators": {
     "@nrwl/angular:application": {
@@ -44,5 +42,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "fv-menu-qr"
+  "defaultProject": "fv-panel-qr"
 }

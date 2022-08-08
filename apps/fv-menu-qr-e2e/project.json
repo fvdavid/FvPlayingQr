@@ -1,13 +1,14 @@
 {
-  "root": "apps/fv-menu-qr-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/fv-menu-qr-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/fv-menu-qr-e2e/cypress.json",
-        "devServerTarget": "fv-menu-qr:serve:development"
+        "cypressConfig": "apps/fv-menu-qr-e2e/cypress.config.ts",
+        "devServerTarget": "fv-menu-qr:serve:development",
+        "testingType": "e2e"
       },
       "configurations": {
         "production": {

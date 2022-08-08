@@ -1,5 +1,5 @@
 {
-  "name": "fv-qr",
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
     "fv-menu-qr": "apps/fv-menu-qr",
