@@ -1,6 +1,6 @@
 {
   "name": "fv-menu-qr",
   "devDependencies": {
-    "@capacitor/cli": "^3.2.5"
+    "@capacitor/cli": "^3.6.0"
   }
 }

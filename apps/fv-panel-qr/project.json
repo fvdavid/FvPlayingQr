@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "apps/fv-panel-qr",
   "sourceRoot": "apps/fv-panel-qr/src",
   "prefix": "fv-playing-qr",
   "targets": {
@@ -76,8 +75,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/fv-panel-qr/src/**/*.ts",
-          "apps/fv-panel-qr/src/**/*.html"
+          "apps/fv-panel-qr/**/*.ts",
+          "apps/fv-panel-qr/**/*.html"
         ]
       }
     },
@@ -85,7 +84,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/fv-panel-qr"],
       "options": {
-        "jestConfig": "apps/fv-panel-qr/jest.config.js",
+        "jestConfig": "apps/fv-panel-qr/jest.config.ts",
         "passWithNoTests": true
       }
     }

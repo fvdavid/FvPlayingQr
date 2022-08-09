@@ -1,95 +1,17 @@
-<!-- <ion-header>
-  <ion-searchbar showCancelButton="always"></ion-searchbar>
-</ion-header> -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tab 1 </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content>
-  <div class="story-list">
-    <div class="scroll-horizontal">
-      <div class="scroll-item" *ngFor="let i of fvListMenus">
-        <div class="item-avatar">
-          <ion-avatar class="avatar-md has-update has-status">
-            <img src="assets/img/avatars/{{i.imageUrl}}.jpg" alt="">
-          </ion-avatar>
-        </div>
-        <div class="item-label">
-          {{ i.name }}
-        </div>
-      </div>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    </div>
-  </div>
-
-  <ion-card>
-    <ion-card-content>
-      <ion-row style="margin-bottom: 2px;">
-        <ion-col>
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-label>
-            <h3>Nasi Goreng Kampung</h3>
-            <p>Notes: extra pedas</p>
-          </ion-label>
-
-          <ion-label style="align-items: center; display: flex;">
-            <ion-icon name="add-circle-outline"></ion-icon>
-            <span style="margin-right: 5px; margin-left: 5px;">
-              1
-            </span>
-            <ion-icon name="remove-circle-outline"></ion-icon>
-          </ion-label>
-        </ion-col>
-
-        <ion-col>
-          <ion-label>
-            <p>
-              Rp 14.500
-            </p>
-
-            <span>
-              <ion-icon name="create-outline"></ion-icon>
-              Note
-            </span>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-
-      <ion-row style="margin-bottom: 2px;">
-        <ion-col>
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-label>
-            <h3>Nasi Goreng Teri Medan</h3>
-            <p>Notes: dikit sambalnya</p>
-          </ion-label>
-
-          <ion-label style="align-items: center; display: flex;">
-            <ion-icon name="add-circle-outline"></ion-icon>
-            <span style="margin-right: 5px; margin-left: 5px;">
-              2
-            </span>
-            <ion-icon name="remove-circle-outline"></ion-icon>
-          </ion-label>
-        </ion-col>
-
-        <ion-col>
-          <ion-label>
-            <p>
-              Rp 17.900
-            </p>
-
-            <span>
-              <ion-icon name="create-outline"></ion-icon>
-              Note
-            </span>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-
-    </ion-card-content>
-  </ion-card>
-
+  <fv-playing-qr-explore-container
+    name="Tab 1 page"
+  ></fv-playing-qr-explore-container>
 </ion-content>
