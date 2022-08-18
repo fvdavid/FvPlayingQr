@@ -4,6 +4,14 @@
 
 export const environment = {
   production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyD32jjGtMTzX-R_g9bJtjn2d3Za5-xqYxU",
+    authDomain: "the-main-menus.firebaseapp.com",
+    projectId: "the-main-menus",
+    storageBucket: "the-main-menus.appspot.com",
+    messagingSenderId: "39010786086",
+    appId: "1:39010786086:web:f7888177473b5d32cdbfe7"
+  }
 };
 
 /*
