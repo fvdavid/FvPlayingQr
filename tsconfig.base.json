@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@fv-playing-qr/data": ["libs/data/src/index.ts"],
       "@fv-playing-qr/material": ["libs/material/src/index.ts"],
       "@fv-playing-qr/portal": ["libs/portal/src/index.ts"]
     }

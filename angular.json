@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "data": "libs/data",
     "fv-menu-qr": "apps/fv-menu-qr",
     "fv-menu-qr-e2e": "apps/fv-menu-qr-e2e",
     "fv-panel-qr": "apps/fv-panel-qr",

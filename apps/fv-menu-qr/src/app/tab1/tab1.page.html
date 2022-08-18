@@ -1,17 +1,158 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Tab 1 </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-header>
+  <ion-searchbar showCancelButton="always"></ion-searchbar>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <fv-playing-qr-explore-container
-    name="Tab 1 page"
-  ></fv-playing-qr-explore-container>
+  <div class="story-list">
+    <div class="scroll-horizontal">
+      <div class="scroll-item" *ngFor="let i of menus" (click)="gotoItem(i)">
+        <div class="item-avatar">
+          <ion-avatar class="avatar-md has-update has-status">
+            <img [src]="i.imgUrlCategory" alt="">
+          </ion-avatar>
+        </div>
+        <div class="item-label">
+          {{ i.category }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isCategoryDefault">
+    <ion-card *ngFor="let fv of menus; first as isFirst">
+
+      <ion-card-content *ngIf="isFirst">
+        <ion-row *ngFor="let mf of fv.categoryList" style="margin-bottom: 2px;">
+          <ion-col>
+            <img [src]="mf.imgUrl" />
+          </ion-col>
+
+          <ion-col size="6" style="display: flex;">
+            <ion-grid style="display: flex; flex-direction: column; justify-content: space-between;">
+
+              <ion-row>
+                <ion-label>
+                  <p style="font-size: 1.2em; color: white;">
+                    {{ mf.name }}
+                  </p>
+                  <span style="display: flex; align-items: center;">
+                    <!-- <ion-icon style="color: red; font-size: 1.3em;" name="heart"></ion-icon>
+                    &nbsp;
+                    21 people like this -->
+
+                    {{ mf.description }}
+                  </span>
+                </ion-label>
+              </ion-row>
+
+              <ion-row>
+                <ion-col style="align-items: center; display: flex; padding-left: 0px;">
+
+                  <ion-button *ngIf="!mf.isOnCart" (click)="addToCart(mf)" size="small">Add</ion-button>
+
+                  <ion-row *ngIf="mf.isOnCart">
+                    <ion-col>
+                      <ion-label style="align-items: center; display: flex;">
+
+                        <ion-icon (click)="increaseCartItem(mf)" class="iconAmount" name="add-circle-outline">
+                        </ion-icon>
+
+                        <span style="margin-right: 10px; margin-left: 10px;">
+                          {{ mf.amount }}
+                        </span>
+
+                        <ion-icon (click)="decreaseCartItem(mf)" class="iconAmount" name="remove-circle-outline">
+                        </ion-icon>
+
+                      </ion-label>
+                    </ion-col>
+
+                    <ion-col>
+                      <ion-icon class="iconAmount" name="create-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                </ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </ion-col>
+
+          <ion-col>
+            <ion-grid>
+              <ion-row>
+                <ion-label>
+                  <p>
+                    Rp {{ mf.price }}
+                  </p>
+                </ion-label>
+              </ion-row>
+
+              <ion-row style="display: flex; justify-content: center;">
+                <ion-icon style="font-size: 1.8em;" name="heart-outline"></ion-icon>
+              </ion-row>
+            </ion-grid>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+
+  <div *ngIf="!isCategoryDefault">
+
+    <ion-card>
+      <ion-card-content>
+        <ion-row *ngFor="let mf of menuByCategory.categoryList" style="margin-bottom: 2px;">
+          <ion-col>
+            <img [src]="mf.imgUrl" />
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-label>
+              <h3>
+                {{ mf.name }}
+              </h3>
+              <p>Notes: dikit sambalnya</p>
+            </ion-label>
+
+            <ion-label style="align-items: center; display: flex;">
+              <ion-icon name="add-circle-outline"></ion-icon>
+              <span style="margin-right: 5px; margin-left: 5px;">
+                2
+              </span>
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </ion-label>
+          </ion-col>
+
+          <ion-col>
+            <ion-label>
+              <p>
+                Rp {{ mf.price }}
+              </p>
+
+              <span>
+                <ion-icon name="create-outline"></ion-icon>
+                Note
+              </span>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button #cart (click)="openCart()" >
+    <div class="cart-length">
+      {{ cartItemCount | async }}
+    </div>
+    <ion-icon name="cart" class="cart-icon"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
